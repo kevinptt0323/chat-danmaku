@@ -15,8 +15,12 @@
 .@{PREFIX}_message {
     position: absolute;
     height: 32px;
-    width: 100%;
+    min-width: 100%;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     animation: translateMessage 10s linear forwards;
     white-space: nowrap;
+
+    .livestream__chat-sticker {
+        height: 32px;
+    }
 }
