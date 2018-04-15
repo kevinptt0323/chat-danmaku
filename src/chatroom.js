@@ -9,6 +9,8 @@ class Chatroom {
         });
     }
 
+    lineNumber = 10;
+
     subscribe(...args) {
         this.msgObservable.subscribe(...args);
     }
@@ -33,10 +35,9 @@ class Chatroom {
 
     render(msg) {
         const msgEl = document.createElement('div');
-        const lineNumber = 10;
         msgEl.classList.add(`${CLASS_PREFIX}_message`);
         msgEl.style.setProperty('--color', msg.color);
-        msgEl.style.setProperty('--line-num', (Math.random() * lineNumber) | 0);
+        msgEl.style.setProperty('--line-num', (Math.random() * this.lineNumber) | 0);
         msgEl.innerHTML = msg.content;
 
         this.canvasEl.appendChild(msgEl);
