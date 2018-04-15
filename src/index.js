@@ -4,7 +4,7 @@ import GarenaLive from './sites/garena-live';
 const chatroom = new GarenaLive();
 
 chatroom.subscribe(msg => {
-    console.log(msg);
+    chatroom.render(msg);
 });
 
 componentHandler.upgradeAllRegistered();
