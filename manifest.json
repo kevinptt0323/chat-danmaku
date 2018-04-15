@@ -9,7 +9,6 @@
         {
             "matches": ["*://garena.live/*"],
             "js": [
-                "lib/jquery/jquery-3.2.1.slim.min.js",
                 "lib/mdl/material.min.js",
                 "dist/index.js"
             ],
