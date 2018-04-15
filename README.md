@@ -1,4 +1,4 @@
-# Chatroom Danmaku
+# Chat Danmaku
 
 ```
 npm run build

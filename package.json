@@ -1,7 +1,7 @@
 {
-  "name": "chatroom-danmaku",
+  "name": "chat-danmaku",
   "version": "0.2.0",
-  "description": "",
+  "description": "Show chat messages as danmaku over videos.",
   "main": "src/index.js",
   "devDependencies": {
     "babel-core": "^6.26.0",

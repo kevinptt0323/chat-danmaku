@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs/Observable';
 
-const CLASS_PREFIX = 'chatroom-danmaku';
+const CLASS_PREFIX = 'chat-danmaku';
 
 class Chatroom {
     constructor() {

@@ -1,4 +1,3 @@
-import componentHandler from 'componentHandler';
 import GarenaLive from './sites/garena-live';
 import Twitch from './sites/twitch-tv';
 
@@ -19,5 +18,3 @@ if (Chatrooms.length >= 1) {
         chatroom.render(msg);
     });
 }
-
-componentHandler.upgradeAllRegistered();
