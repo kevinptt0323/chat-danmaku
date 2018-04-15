@@ -1,70 +1,34 @@
-import { Observable } from 'rxjs/Observable';
+import Chatroom from '../../chatroom';
 
-const CLASS_PREFIX = 'chatroom-danmaku';
-
-class GarenaLive {
-    constructor(msgObservable, el) {
-        this.msgObservable = Observable.create(observer => {
-            this.msgObserver = observer;
-        });
+class GarenaLive extends Chatroom {
+    constructor() {
+        super();
         setTimeout(() => {
-            this.initDomObserver(el);
-            this.$$canvas = this.createCanvas();
+            const chatroomEl =
+                document.querySelector('.livestream__chat-messages');
+            this.initDomObserver(chatroomEl);
+            const parentEl = document.querySelector('.livestream__overlay');
+            this.canvasEl = Chatroom.createCanvas(parentEl);
         }, 2000);
     }
 
-    subscribe(...args) {
-        this.msgObservable.subscribe(...args);
-    }
-
-    initDomObserver(el) {
-        const _el = el || document.querySelector('.livestream__chat-messages');
-        const observerOptions = {
-            childList: true
-        };
-
-        this.domObservable = new MutationObserver(
-            mutations => this.onUpdate(mutations)
-        );
-        this.domObservable.observe(_el, observerOptions);
-    }
-
     onUpdate(mutations) {
-        const newMessages = [];
         mutations.forEach(({ addedNodes }) => {
-            addedNodes.forEach(node => {
-                const $$author =
+            addedNodes.forEach((node) => {
+                const authorEl =
                     node.querySelector('.livestream__chat-author');
-                const $$content =
+                const contentEl =
                     node.querySelector('.livestream__chat-message-content');
-                if ($$author && $$content) {
+                if (authorEl && contentEl) {
                     this.msgObserver.next({
-                        author: $$author.innerHTML,
-                        color: $$author.style.color,
-                        content: $$content.innerHTML,
+                        author: authorEl.innerHTML,
+                        color: authorEl.style.color,
+                        content: contentEl.innerHTML,
                     });
                 }
             });
         });
     }
-
-    createCanvas() {
-        const $$canvas = document.createElement('div');
-        $$canvas.classList.add(`${CLASS_PREFIX}_messages`);
-        const $$parent = document.querySelector('.livestream__overlay');
-        $$parent.appendChild($$canvas);
-        return $$canvas;
-    }
-
-    render(msg) {
-        const $$msg = document.createElement('div');
-        $$msg.classList.add(`${CLASS_PREFIX}_message`);
-        $$msg.style.color = msg.color;
-        $$msg.style.top = (((Math.random() * 10)|0) * 32 + 4) + 'px';
-        $$msg.innerHTML = msg.content;
-        this.$$canvas.appendChild($$msg);
-        setTimeout(() => $$msg.remove(), 10000);
-    }
-};
+}
 
 export default GarenaLive;

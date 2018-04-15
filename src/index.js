@@ -3,7 +3,7 @@ import GarenaLive from './sites/garena-live';
 
 const chatroom = new GarenaLive();
 
-chatroom.subscribe(msg => {
+chatroom.subscribe((msg) => {
     chatroom.render(msg);
 });
 
