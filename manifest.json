@@ -7,7 +7,7 @@
 
     "content_scripts": [
         {
-            "matches": ["*://garena.live/*"],
+            "matches": ["*://garena.live/*", "*://www.twitch.tv/*"],
             "js": [
                 "lib/mdl/material.min.js",
                 "dist/index.js"
