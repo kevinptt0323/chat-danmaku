@@ -27,6 +27,7 @@ class Chatroom {
         const canvasEl = document.createElement('div');
         canvasEl.classList.add(`${CLASS_PREFIX}_messages`);
         parentEl.appendChild(canvasEl);
+        canvasEl.addEventListener('animationend', e => e.target.remove());
         return canvasEl;
     }
 
@@ -39,7 +40,6 @@ class Chatroom {
         msgEl.innerHTML = msg.content;
 
         this.canvasEl.appendChild(msgEl);
-        setTimeout(() => msgEl.remove(), 10000);
     }
 }
 
