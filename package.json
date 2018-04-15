@@ -23,5 +23,7 @@
   },
   "author": "",
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "rxjs": "^5.5.10"
+  }
 }
