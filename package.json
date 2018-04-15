@@ -1,0 +1,27 @@
+{
+  "name": "chatroom-danmaku",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babelify": "^8.0.0",
+    "browserify": "^15.1.0",
+    "eslint": "^4.18.0",
+    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-plugin-import": "^2.8.0",
+    "exposify": "^0.5.0",
+    "gulp": "^3.9.1",
+    "gulp-less": "^3.4.0",
+    "vinyl-source-stream": "^2.0.0"
+  },
+  "scripts": {
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint src"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {}
+}
