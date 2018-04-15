@@ -1,10 +1,11 @@
 @import (css) url('https://fonts.googleapis.com/icon?family=Material+Icons');
 
 @PREFIX: chatroom-danmaku;
+@lineHeight: 32px;
+@duration: 10s;
 
 .@{PREFIX}_messages {
     height: 100%;
-    font-size: 24px;
 }
 
 @keyframes translateMessage {
@@ -14,10 +15,12 @@
 
 .@{PREFIX}_message {
     position: absolute;
-    height: 32px;
+    height: @lineHeight;
+    line-height: @lineHeight;
+    font-size: 28px;
     min-width: 100%;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    animation: translateMessage 10s linear forwards;
+    animation: translateMessage @duration linear forwards;
     white-space: nowrap;
 }
 

@@ -34,7 +34,7 @@ class Chatroom {
         const msgEl = document.createElement('div');
         msgEl.classList.add(`${CLASS_PREFIX}_message`);
         msgEl.style.color = msg.color;
-        msgEl.style.top = `${(((Math.random() * 10) | 0) * 32 + 4)}px`;
+        msgEl.style.top = `${(((Math.random() * 10) | 0) * 32)}px`;
         msgEl.innerHTML = msg.content;
 
         this.canvasEl.appendChild(msgEl);
