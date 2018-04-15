@@ -1,2 +1,3 @@
-dist/
+extension/index.js
+extension/index.css
 node_modules/

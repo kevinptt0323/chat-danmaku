@@ -18,14 +18,14 @@ gulp.task('build:js', () => {
         .transform('exposify', { expose })
         .bundle()
         .pipe(source('index.js'))
-        .pipe(gulp.dest(`${__dirname}/dist/`));
+        .pipe(gulp.dest(`${__dirname}/extension/`));
 });
 
 gulp.task('build:css', () => {
     const entry = `${__dirname}/src/index.less`;
     gulp.src(entry)
         .pipe(less())
-        .pipe(gulp.dest(`${__dirname}/dist/`));
+        .pipe(gulp.dest(`${__dirname}/extension/`));
 })
 
 gulp.task('build', ['build:js', 'build:css']);

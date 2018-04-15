@@ -11,12 +11,10 @@
         {
             "matches": ["*://garena.live/*", "*://www.twitch.tv/*"],
             "js": [
-                "lib/mdl/material.min.js",
-                "dist/index.js"
+                "index.js"
             ],
             "css": [
-                "lib/mdl/material.min.css",
-                "dist/index.css"
+                "index.css"
             ]
         }
     ]
