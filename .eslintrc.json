@@ -16,6 +16,7 @@
         "import/no-extraneous-dependencies": "off",
         "import/extensions": "off",
         "import/no-unresolved": "off",
+        "no-bitwise": "off",
         "no-plusplus": "off"
     }
 }
