@@ -1,6 +1,6 @@
 {
     "manifest_version": 2,
-    "name": "Chat Danmaku",
+    "name": "Chat Danmaku (Beta)",
     "description": "Show chat messages as danmaku over videos.",
     "version": "0.2.0",
     "homepage_url": "https://github.com/kevinptt0323/chat-danmaku",
