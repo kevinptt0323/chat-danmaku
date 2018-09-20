@@ -3,18 +3,18 @@ import Twitch from './sites/twitch-tv';
 
 const { host } = document.location;
 const hostMapping = [
-    { validate: /^garena\.live$/, chatroom: GarenaLive },
-    { validate: /^www\.twitch\.tv$/, chatroom: Twitch },
+  { validate: /^garena\.live$/, chatroom: GarenaLive },
+  { validate: /^www\.twitch\.tv$/, chatroom: Twitch },
 ];
 
 const Chatrooms = hostMapping
-    .filter(m => m.validate.test(host))
-    .map(m => m.chatroom);
+  .filter(m => m.validate.test(host))
+  .map(m => m.chatroom);
 
 if (Chatrooms.length >= 1) {
-    const chatroom = new Chatrooms[0]();
+  const chatroom = new Chatrooms[0]();
 
-    chatroom.subscribe((msg) => {
-        chatroom.render(msg);
-    });
+  chatroom.subscribe((msg) => {
+    chatroom.render(msg);
+  });
 }

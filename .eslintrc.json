@@ -1,22 +1,22 @@
 {
-    "env": {
-        "browser": true,
-        "es6": true,
-        "webextensions": true
-    },
-    "extends": [
-        "airbnb-base"
-    ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "sourceType": "module"
-    },
-    "rules": {
-        "indent": ["error", 4],
-        "import/no-extraneous-dependencies": "off",
-        "import/extensions": "off",
-        "import/no-unresolved": "off",
-        "no-bitwise": "off",
-        "no-plusplus": "off"
-    }
+  "env": {
+    "browser": true,
+    "es6": true,
+    "webextensions": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "sourceType": "module"
+  },
+  "rules": {
+    "indent": ["error", 2],
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "import/no-unresolved": "off",
+    "no-bitwise": "off",
+    "no-plusplus": "off"
+  }
 }

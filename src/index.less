@@ -5,27 +5,27 @@
 @duration: 10s;
 
 .@{PREFIX}_messages {
-    height: 100%;
-    --line-height: @lineHeight;
+  height: 100%;
+  --line-height: @lineHeight;
 }
 
 @keyframes translateMessage {
-    from { transform: translateX(100%) ;}
-    to { transform: translateX(-100%); }
+  from { transform: translateX(100%) ;}
+  to { transform: translateX(-100%); }
 }
 
 .@{PREFIX}_message {
-    position: absolute;
-    height: var(--line-height);
-    line-height: var(--line-height);
-    font-size: 28px;
-    min-width: 100%;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    animation: translateMessage @duration linear forwards;
-    white-space: nowrap;
+  position: absolute;
+  height: var(--line-height);
+  line-height: var(--line-height);
+  font-size: 28px;
+  min-width: 100%;
+  text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+  animation: translateMessage @duration linear forwards;
+  white-space: nowrap;
 
-    top: ~"calc(@{lineHeight} * var(--line-num))";
-    color: var(--color);
+  top: ~"calc(@{lineHeight} * var(--line-num))";
+  color: var(--color);
 }
 
 @import './sites/garena-live/index.less';
