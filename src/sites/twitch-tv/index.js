@@ -1,16 +1,18 @@
 import Chatroom from '../../chatroom';
+import { querySelector as $ } from '../../utils';
 
 class Twitch extends Chatroom {
   constructor() {
     super();
-    setTimeout(() => {
-      const chatroomEl =
-        document.querySelector('.chat-list__lines div[role="log"]');
-      this.initDomObserver(chatroomEl);
-      const parentEl = document.querySelector('.player-video');
-      this.canvasEl = Chatroom.createCanvas(parentEl);
-    }, 2000);
+    setTimeout(this.initialize, 2000);
   }
+
+  initialize = () => {
+    const chatroomEl = $('.chat-list__lines div[role="log"]');
+    this.initDomObserver(chatroomEl);
+    const parentEl = $('.player-video');
+    this.canvasEl = Chatroom.createCanvas(parentEl);
+  };
 
   onUpdate(mutations) {
     mutations.forEach(({ addedNodes }) => {

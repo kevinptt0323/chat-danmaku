@@ -1,16 +1,18 @@
 import Chatroom from '../../chatroom';
+import { querySelector as $ } from '../../utils';
 
 class GarenaLive extends Chatroom {
   constructor() {
     super();
-    setTimeout(() => {
-      const chatroomEl =
-        document.querySelector('.livestream__chat-messages');
-      this.initDomObserver(chatroomEl);
-      const parentEl = document.querySelector('.livestream__overlay');
-      this.canvasEl = Chatroom.createCanvas(parentEl);
-    }, 2000);
+    setTimeout(this.initialize, 2000);
   }
+
+  initialize = () => {
+    const chatroomEl = $('.livestream__chat-messages');
+    this.initDomObserver(chatroomEl);
+    const parentEl = $('.livestream__overlay');
+    this.canvasEl = Chatroom.createCanvas(parentEl);
+  };
 
   onUpdate(mutations) {
     mutations.forEach(({ addedNodes }) => {
