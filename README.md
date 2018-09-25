@@ -16,7 +16,7 @@ perfectly. If you encounter any problems or bugs, refresh page first.
 
 ## Screenshots
 
-![](./screenshots/1280x800.png)
+![](./screenshots/1_1280x800.png)
 
 ## Build
 
