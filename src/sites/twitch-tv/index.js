@@ -15,12 +15,12 @@ class Twitch extends Chatroom {
 
     const oldToggleChatroomBtn = $('button[data-a-target="right-column__toggle-collapse-btn"]');
     const newToggleChatroomBtn = oldToggleChatroomBtn.cloneNode(true);
-    newToggleChatroomBtn.addEventListener('click', this.toggleChatroom);
+    newToggleChatroomBtn.addEventListener('click', Twitch.toggleChatroom);
     oldToggleChatroomBtn.parentNode.appendChild(newToggleChatroomBtn);
     oldToggleChatroomBtn.remove();
   };
 
-  toggleChatroom() {
+  static toggleChatroom() {
     const chatroomRootEl = $('.right-column > div:first-child');
     const whispersEl = $('.whispers');
     const playerRootEl = $('.persistent-player');
@@ -31,14 +31,14 @@ class Twitch extends Chatroom {
       chatroomRootEl.classList.add('tw-hide');
       whispersEl.classList.remove('whispers--right-column-expanded');
       if (isTheatre) {
-        playerRootEl.style['width'] = '100%';
+        playerRootEl.style.width = '100%';
       }
     } else {
       chatroomRootEl.classList.add('tw-block');
       chatroomRootEl.classList.remove('tw-hide');
       whispersEl.classList.add('whispers--right-column-expanded');
       if (isTheatre) {
-        playerRootEl.style['width'] = 'calc(100% - 34rem)';
+        playerRootEl.style.width = 'calc(100% - 34rem)';
       }
     }
   }
