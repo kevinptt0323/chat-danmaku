@@ -7,9 +7,16 @@ class Chatroom {
     this.msgObservable = Observable.create((observer) => {
       this.msgObserver = observer;
     });
+
+    chrome.storage.sync.get({
+      messageColor: this.messageColor,
+      lineNumber: this.lineNumber,
+    }, items => this.loadStorage(items, 'sync'));
+    chrome.storage.onChanged.addListener(this.onStorageChanged.bind(this));
   }
 
   lineNumber = 10;
+  messageColor = true;
 
   subscribe(...args) {
     this.msgObservable.subscribe(...args);
@@ -24,6 +31,26 @@ class Chatroom {
     this.domObservable.observe(chatroomEl, observerOptions);
   }
 
+  loadStorage(items, namespace) {
+    const changed = {};
+    Object.keys(items).forEach((key) => {
+      changed[key] = {
+        newValue: items[key],
+        oldValue: null,
+      };
+    });
+    this.onStorageChanged(changed, namespace);
+  }
+
+  onStorageChanged(changed) {
+    if ('messageColor' in changed) {
+      this.messageColor = changed.messageColor.newValue;
+    }
+    if ('lineNumber' in changed) {
+      this.lineNumber = changed.lineNumber.newValue;
+    }
+  }
+
   static createCanvas(parentEl) {
     const canvasEl = document.createElement('div');
     canvasEl.classList.add(`${CLASS_PREFIX}_messages`);
@@ -35,7 +62,9 @@ class Chatroom {
   render(msg) {
     const msgEl = document.createElement('div');
     msgEl.classList.add(`${CLASS_PREFIX}_message`);
-    msgEl.style.setProperty('--color', msg.color);
+    if (this.messageColor) {
+      msgEl.style.setProperty('--color', msg.color);
+    }
     msgEl.style.setProperty('--line-num', ~~(Math.random() * this.lineNumber));
     msgEl.innerHTML = msg.content;
 
