@@ -1,5 +1,6 @@
 import camelCase from 'camelcase';
 import { getChromeOptions, querySelector as $ } from '../utils';
+import defaultOptions from '.';
 
 function bindBooleanOption(key) {
   const camelCaseKey = camelCase(key);
@@ -27,7 +28,9 @@ function bindNumberOption(key) {
 
   document.addEventListener('DOMContentLoaded', async () => {
     const options = await getChromeOptions();
-    $(`#${key}__input`).value = options[camelCaseKey];
+    const inputDom = $(`#${key}__input`);
+    inputDom.value = options[camelCaseKey];
+    inputDom.placeholder = defaultOptions[camelCaseKey];
   });
 
   dom.addEventListener('change', function onMessageLineNumberChange(e) {
@@ -48,5 +51,6 @@ function bindNumberOption(key) {
 bindBooleanOption('message-color');
 bindBooleanOption('message-border');
 bindBooleanOption('message-shadow');
+bindNumberOption('message-opacity');
 bindNumberOption('message-line-number');
 

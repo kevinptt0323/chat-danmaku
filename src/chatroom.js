@@ -68,6 +68,7 @@ class Chatroom {
     if (this.options.messageShadow) {
       msgEl.classList.add('shadow');
     }
+    msgEl.style.setProperty('--opacity', this.options.messageOpacity / 100);
     msgEl.style.setProperty('--line-num', ~~(Math.random() * this.options.messageLineNumber));
     msgEl.innerHTML = msg.content;
 

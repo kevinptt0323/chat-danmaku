@@ -2,6 +2,7 @@ const defaultOptions = {
   messageColor: true,
   messageBorder: true,
   messageShadow: false,
+  messageOpacity: 60,
   messageLineNumber: 10,
 };
 
