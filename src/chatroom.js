@@ -10,12 +10,12 @@ class Chatroom {
 
     chrome.storage.sync.get({
       messageColor: this.messageColor,
-      lineNumber: this.lineNumber,
+      messageLineNumber: this.messageLineNumber,
     }, items => this.loadStorage(items, 'sync'));
     chrome.storage.onChanged.addListener(this.onStorageChanged.bind(this));
   }
 
-  lineNumber = 10;
+  messageLineNumber = 10;
   messageColor = true;
 
   subscribe(...args) {
@@ -46,8 +46,8 @@ class Chatroom {
     if ('messageColor' in changed) {
       this.messageColor = changed.messageColor.newValue;
     }
-    if ('lineNumber' in changed) {
-      this.lineNumber = changed.lineNumber.newValue;
+    if ('messageLineNumber' in changed) {
+      this.messageLineNumber = changed.messageLineNumber.newValue;
     }
   }
 
@@ -65,7 +65,7 @@ class Chatroom {
     if (this.messageColor) {
       msgEl.style.setProperty('--color', msg.color);
     }
-    msgEl.style.setProperty('--line-num', ~~(Math.random() * this.lineNumber));
+    msgEl.style.setProperty('--line-num', ~~(Math.random() * this.messageLineNumber));
     msgEl.innerHTML = msg.content;
 
     this.canvasEl.appendChild(msgEl);

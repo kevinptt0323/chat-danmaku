@@ -16,9 +16,21 @@
             Message color (if available)
           </span>
           <span class="mdl-list__item-secondary-action">
-            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="message-color">
-              <input type="checkbox" id="message-color" class="mdl-switch__input" checked>
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" id="message-color"
+            for="message-color__input">
+              <input type="checkbox" id="message-color__input" class="mdl-switch__input" checked>
             </label>
+          </span>
+        </li>
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            Number of Danmaku line (5-20)
+          </span>
+          <span class="mdl-list__item-secondary-action">
+            <div class="mdl-textfield mdl-js-textfield" id="message-line-number">
+              <input class="mdl-textfield__input" type="number" min="5" max="20" placeholder="10"
+              id="message-line-number__input">
+            </div>
           </span>
         </li>
       </ul>

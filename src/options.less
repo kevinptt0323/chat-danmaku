@@ -7,7 +7,7 @@
     display: block;
 
     &:not(:last-child) {
-      border-bottom: 1px solid rgba(0,0,0,0.12);
+      border-bottom: 1px solid rgba(0,0,0,.12);
     }
 
     &__header {
@@ -15,4 +15,18 @@
       font-weight: bold;
     }
   }
+}
+
+.mdl-textfield {
+  padding: 0;
+  &__input {
+    text-align: right;
+    &::placeholder {
+      color: rgba(0,0,0,.26);
+    }
+  }
+}
+
+#message-line-number {
+  width: 28px;
 }

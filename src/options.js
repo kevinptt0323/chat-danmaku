@@ -1,22 +1,43 @@
 import { querySelector as $ } from './utils';
 
-// Restores state using the preferences stored in chrome.storage.
+/*
+ * Restores state using the preferences stored in chrome.storage.
+ */
 function restoreOptions() {
   chrome.storage.sync.get({
     messageColor: true,
-  }, (items) => {
-    if (items.messageColor) {
-      $('#message-color').parentNode.MaterialSwitch.on();
+    messageLineNumber: 10,
+  }, ({
+    messageColor,
+    messageLineNumber,
+  }) => {
+    if (messageColor) {
+      $('#message-color').MaterialSwitch.on();
     } else {
-      $('#message-color').parentNode.MaterialSwitch.off();
+      $('#message-color').MaterialSwitch.off();
     }
+    $('#message-line-number__input').value = messageLineNumber;
   });
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
-// $('#save').addEventListener('click', saveOptions);
-$('#message-color').addEventListener('change', (e) => {
+
+$('#message-color__input').addEventListener('change', (e) => {
   chrome.storage.sync.set({
     messageColor: e.target.checked,
+  });
+});
+
+$('#message-line-number').addEventListener('change', function onMessageLineNumberChange(e) {
+  const { target } = e;
+  let value = target.value | 0;
+  if (value < target.min || value > target.max) {
+    value = Math.max(target.min, value);
+    value = Math.min(target.max, value);
+    target.value = value;
+    this.MaterialTextfield.checkValidity();
+  }
+  chrome.storage.sync.set({
+    messageLineNumber: value,
   });
 });
