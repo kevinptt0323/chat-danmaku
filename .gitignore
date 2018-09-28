@@ -1,6 +1,6 @@
+extension/icons/icon.psd
 extension/index.css
 extension/index.js
-extension/options.css
-extension/options.js
-extension/icons/icon.psd
+extension/options/index.css
+extension/options/index.js
 node_modules/

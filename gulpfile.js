@@ -14,12 +14,12 @@ gulp.task('build:js', () => {
     .pipe(gulp.dest(`${__dirname}/extension/`));
 
   browserify({
-    entries: `${__dirname}/src/options.js`,
+    entries: `${__dirname}/src/options/index.js`,
     transform: [babelify],
   })
     .bundle()
-    .pipe(source('options.js'))
-    .pipe(gulp.dest(`${__dirname}/extension/`));
+    .pipe(source('index.js'))
+    .pipe(gulp.dest(`${__dirname}/extension/options`));
 });
 
 gulp.task('build:css', () => {
@@ -27,9 +27,9 @@ gulp.task('build:css', () => {
     .pipe(less())
     .pipe(gulp.dest(`${__dirname}/extension/`));
 
-  gulp.src(`${__dirname}/src/options.less`)
+  gulp.src(`${__dirname}/src/options/index.less`)
     .pipe(less())
-    .pipe(gulp.dest(`${__dirname}/extension/`));
+    .pipe(gulp.dest(`${__dirname}/extension/options`));
 })
 
 gulp.task('build', ['build:js', 'build:css']);

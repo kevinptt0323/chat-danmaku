@@ -1,4 +1,4 @@
-import { querySelector as $ } from './utils';
+import { querySelector as $ } from '../utils';
 
 /*
  * Restores state using the preferences stored in chrome.storage.
