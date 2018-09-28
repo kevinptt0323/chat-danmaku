@@ -2,17 +2,21 @@ import camelCase from 'camelcase';
 import { getChromeOptions, querySelector as $ } from '../utils';
 import defaultOptions from './defaultOptions';
 
+function renderBooleanOption(dom, value) {
+  if (value) {
+    dom.MaterialSwitch.on();
+  } else {
+    dom.MaterialSwitch.off();
+  }
+}
+
 function bindBooleanOption(key) {
   const camelCaseKey = camelCase(key);
   const dom = $(`#${key}`);
 
   document.addEventListener('DOMContentLoaded', async () => {
     const options = await getChromeOptions();
-    if (options[camelCaseKey]) {
-      dom.MaterialSwitch.on();
-    } else {
-      dom.MaterialSwitch.off();
-    }
+    renderBooleanOption(dom, options[camelCaseKey]);
   });
 
   dom.addEventListener('change', (e) => {
@@ -20,6 +24,19 @@ function bindBooleanOption(key) {
       [camelCaseKey]: e.target.checked,
     });
   });
+
+  $('#reset').addEventListener('click', () => {
+    renderBooleanOption(dom, defaultOptions[camelCaseKey]);
+  });
+}
+
+function renderNumberOption(dom, value, placeholder) {
+  const inputDom = dom.querySelector('.mdl-textfield__input');
+  inputDom.value = value;
+  if (typeof placeholder !== 'undefined') {
+    inputDom.placeholder = placeholder;
+  }
+  dom.MaterialTextfield.checkValidity();
 }
 
 function bindNumberOption(key) {
@@ -28,9 +45,7 @@ function bindNumberOption(key) {
 
   document.addEventListener('DOMContentLoaded', async () => {
     const options = await getChromeOptions();
-    const inputDom = $(`#${key}__input`);
-    inputDom.value = options[camelCaseKey];
-    inputDom.placeholder = defaultOptions[camelCaseKey];
+    renderNumberOption(dom, options[camelCaseKey], defaultOptions[camelCaseKey]);
   });
 
   dom.addEventListener('change', function onMessageLineNumberChange(e) {
@@ -39,12 +54,15 @@ function bindNumberOption(key) {
     if (value < target.min || value > target.max) {
       value = Math.max(target.min, value);
       value = Math.min(target.max, value);
-      target.value = value;
-      this.MaterialTextfield.checkValidity();
+      renderNumberOption(this, value);
     }
     chrome.storage.sync.set({
       [camelCaseKey]: value,
     });
+  });
+
+  $('#reset').addEventListener('click', () => {
+    renderNumberOption(dom, defaultOptions[camelCaseKey], defaultOptions[camelCaseKey]);
   });
 }
 
@@ -53,4 +71,8 @@ bindBooleanOption('message-border');
 bindBooleanOption('message-shadow');
 bindNumberOption('message-opacity');
 bindNumberOption('message-line-number');
+
+$('#reset').addEventListener('click', () => {
+  chrome.storage.sync.set(defaultOptions);
+});
 
