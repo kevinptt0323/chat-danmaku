@@ -1,0 +1,18 @@
+@Indigo500: #3F51B5;
+@primaryColor: @Indigo500;
+
+.option-groups {
+  margin: 0;
+  .option-group {
+    display: block;
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0,0,0,0.12);
+    }
+
+    &__header {
+      color: @primaryColor;
+      font-weight: bold;
+    }
+  }
+}

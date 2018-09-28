@@ -23,8 +23,11 @@ gulp.task('build:js', () => {
 });
 
 gulp.task('build:css', () => {
-  const entry = `${__dirname}/src/index.less`;
-  gulp.src(entry)
+  gulp.src(`${__dirname}/src/index.less`)
+    .pipe(less())
+    .pipe(gulp.dest(`${__dirname}/extension/`));
+
+  gulp.src(`${__dirname}/src/options.less`)
     .pipe(less())
     .pipe(gulp.dest(`${__dirname}/extension/`));
 })

@@ -3,19 +3,25 @@
 <head>
   <title>My Test Extension Options</title>
   <link rel="stylesheet" href="./lib/mdl/material.min.css">
+  <link rel="stylesheet" href="./options.css">
   <script src="./lib/mdl/material.min.js"></script>
 </head>
 <body>
-  <ul class="mdl-list">
-    <li class="mdl-list__item">
-      <span class="mdl-list__item-primary-content">
-        Message color (if available)
-      </span>
-      <span class="mdl-list__item-secondary-action">
-        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="message-color">
-          <input type="checkbox" id="message-color" class="mdl-switch__input" checked>
-        </label>
-      </span>
+  <ul class="mdl-list option-groups">
+    <li class="mdl-list__item option-group">
+      <div class="option-group__header">Styles</div>
+      <ul class="mdl-list option-group__content">
+        <li class="mdl-list__item">
+          <span class="mdl-list__item-primary-content">
+            Message color (if available)
+          </span>
+          <span class="mdl-list__item-secondary-action">
+            <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="message-color">
+              <input type="checkbox" id="message-color" class="mdl-switch__input" checked>
+            </label>
+          </span>
+        </li>
+      </ul>
     </li>
   </ul>
   <script src="options.js"></script>

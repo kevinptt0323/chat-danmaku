@@ -1,4 +1,5 @@
 extension/index.js
 extension/index.css
+extension/options.css
 extension/icons/icon.psd
 node_modules/
