@@ -1,6 +1,6 @@
 import camelCase from 'camelcase';
 import { getChromeOptions, querySelector as $ } from '../utils';
-import defaultOptions from '.';
+import defaultOptions from './defaultOptions';
 
 function bindBooleanOption(key) {
   const camelCaseKey = camelCase(key);
