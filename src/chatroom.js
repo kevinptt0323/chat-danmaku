@@ -14,6 +14,8 @@ class Chatroom {
 
   static defaultOptions = {
     messageColor: true,
+    messageBorder: true,
+    messageShadow: false,
     messageLineNumber: 10,
   }
   options = {}
@@ -46,6 +48,12 @@ class Chatroom {
     if ('messageColor' in changed) {
       this.options.messageColor = changed.messageColor.newValue;
     }
+    if ('messageBorder' in changed) {
+      this.options.messageBorder = changed.messageBorder.newValue;
+    }
+    if ('messageShadow' in changed) {
+      this.options.messageShadow = changed.messageShadow.newValue;
+    }
     if ('messageLineNumber' in changed) {
       this.options.messageLineNumber = changed.messageLineNumber.newValue;
     }
@@ -53,7 +61,7 @@ class Chatroom {
 
   static createCanvas(parentEl) {
     const canvasEl = document.createElement('div');
-    canvasEl.classList.add(`${CLASS_PREFIX}_messages`);
+    canvasEl.classList.add(`${CLASS_PREFIX}-messages`);
     parentEl.appendChild(canvasEl);
     canvasEl.addEventListener('animationend', e => e.target.remove());
     return canvasEl;
@@ -61,9 +69,15 @@ class Chatroom {
 
   render(msg) {
     const msgEl = document.createElement('div');
-    msgEl.classList.add(`${CLASS_PREFIX}_message`);
+    msgEl.classList.add(`${CLASS_PREFIX}-message`);
     if (this.options.messageColor) {
       msgEl.style.setProperty('--color', msg.color);
+    }
+    if (this.options.messageBorder) {
+      msgEl.classList.add(`border`);
+    }
+    if (this.options.messageShadow) {
+      msgEl.classList.add(`shadow`);
     }
     msgEl.style.setProperty('--line-num', ~~(Math.random() * this.options.messageLineNumber));
     msgEl.innerHTML = msg.content;

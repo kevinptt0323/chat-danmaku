@@ -1,14 +1,14 @@
 import { querySelector as $ } from '../utils';
+import Chatroom from '../chatroom';
 
 /*
  * Restores state using the preferences stored in chrome.storage.
  */
 function restoreOptions() {
-  chrome.storage.sync.get({
-    messageColor: true,
-    messageLineNumber: 10,
-  }, ({
+  chrome.storage.sync.get(Chatroom.defaultOptions, ({
     messageColor,
+    messageBorder,
+    messageShadow,
     messageLineNumber,
   }) => {
     if (messageColor) {
@@ -16,15 +16,37 @@ function restoreOptions() {
     } else {
       $('#message-color').MaterialSwitch.off();
     }
+    if (messageBorder) {
+      $('#message-border').MaterialSwitch.on();
+    } else {
+      $('#message-border').MaterialSwitch.off();
+    }
+    if (messageShadow) {
+      $('#message-shadow').MaterialSwitch.on();
+    } else {
+      $('#message-shadow').MaterialSwitch.off();
+    }
     $('#message-line-number__input').value = messageLineNumber;
   });
 }
 
 document.addEventListener('DOMContentLoaded', restoreOptions);
 
-$('#message-color__input').addEventListener('change', (e) => {
+$('#message-color').addEventListener('change', (e) => {
   chrome.storage.sync.set({
     messageColor: e.target.checked,
+  });
+});
+
+$('#message-border').addEventListener('change', (e) => {
+  chrome.storage.sync.set({
+    messageBorder: e.target.checked,
+  });
+});
+
+$('#message-shadow').addEventListener('change', (e) => {
+  chrome.storage.sync.set({
+    messageShadow: e.target.checked,
   });
 });
 
