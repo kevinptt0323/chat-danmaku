@@ -32,4 +32,9 @@ gulp.task('build:css', () => {
     .pipe(gulp.dest(`${__dirname}/extension/options`));
 })
 
-gulp.task('build', ['build:js', 'build:css']);
+gulp.task('build:html', () => {
+  gulp.src(`${__dirname}/src/options/index.html`)
+    .pipe(gulp.dest(`${__dirname}/extension/options`));
+});
+
+gulp.task('build', ['build:js', 'build:css', 'build:html']);
