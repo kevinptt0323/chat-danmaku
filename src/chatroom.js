@@ -1,4 +1,6 @@
 import { Observable } from 'rxjs/Observable';
+import { getChromeOptions } from './utils';
+import { keys as optionKeys } from './options/defaultOptions';
 
 const CLASS_PREFIX = 'chat-danmaku';
 
@@ -8,16 +10,10 @@ class Chatroom {
       this.msgObserver = observer;
     });
 
-    chrome.storage.sync.get(Chatroom.defaultOptions, items => this.loadStorage(items, 'sync'));
+    getChromeOptions().then(items => this.loadStorage(items, 'sync'));
     chrome.storage.onChanged.addListener(this.onStorageChanged.bind(this));
   }
 
-  static defaultOptions = {
-    messageColor: true,
-    messageBorder: true,
-    messageShadow: false,
-    messageLineNumber: 10,
-  }
   options = {}
 
   subscribe(...args) {
@@ -45,17 +41,10 @@ class Chatroom {
   }
 
   onStorageChanged(changed) {
-    if ('messageColor' in changed) {
-      this.options.messageColor = changed.messageColor.newValue;
-    }
-    if ('messageBorder' in changed) {
-      this.options.messageBorder = changed.messageBorder.newValue;
-    }
-    if ('messageShadow' in changed) {
-      this.options.messageShadow = changed.messageShadow.newValue;
-    }
-    if ('messageLineNumber' in changed) {
-      this.options.messageLineNumber = changed.messageLineNumber.newValue;
+    for (let key of optionKeys) {
+      if (key in changed) {
+        this.options[key] = changed[key].newValue;
+      }
     }
   }
 
@@ -74,10 +63,10 @@ class Chatroom {
       msgEl.style.setProperty('--color', msg.color);
     }
     if (this.options.messageBorder) {
-      msgEl.classList.add(`border`);
+      msgEl.classList.add('border');
     }
     if (this.options.messageShadow) {
-      msgEl.classList.add(`shadow`);
+      msgEl.classList.add('shadow');
     }
     msgEl.style.setProperty('--line-num', ~~(Math.random() * this.options.messageLineNumber));
     msgEl.innerHTML = msg.content;

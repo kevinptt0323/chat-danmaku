@@ -1,65 +1,52 @@
-import { querySelector as $ } from '../utils';
-import Chatroom from '../chatroom';
+import camelCase from 'camelcase';
+import { getChromeOptions, querySelector as $ } from '../utils';
 
-/*
- * Restores state using the preferences stored in chrome.storage.
- */
-function restoreOptions() {
-  chrome.storage.sync.get(Chatroom.defaultOptions, ({
-    messageColor,
-    messageBorder,
-    messageShadow,
-    messageLineNumber,
-  }) => {
-    if (messageColor) {
-      $('#message-color').MaterialSwitch.on();
+function bindBooleanOption(key) {
+  const camelCaseKey = camelCase(key);
+  const dom = $(`#${key}`);
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    const options = await getChromeOptions();
+    if (options[camelCaseKey]) {
+      dom.MaterialSwitch.on();
     } else {
-      $('#message-color').MaterialSwitch.off();
+      dom.MaterialSwitch.off();
     }
-    if (messageBorder) {
-      $('#message-border').MaterialSwitch.on();
-    } else {
-      $('#message-border').MaterialSwitch.off();
-    }
-    if (messageShadow) {
-      $('#message-shadow').MaterialSwitch.on();
-    } else {
-      $('#message-shadow').MaterialSwitch.off();
-    }
-    $('#message-line-number__input').value = messageLineNumber;
+  });
+
+  dom.addEventListener('change', (e) => {
+    chrome.storage.sync.set({
+      [camelCaseKey]: e.target.checked,
+    });
   });
 }
 
-document.addEventListener('DOMContentLoaded', restoreOptions);
+function bindNumberOption(key) {
+  const camelCaseKey = camelCase(key);
+  const dom = $(`#${key}`);
 
-$('#message-color').addEventListener('change', (e) => {
-  chrome.storage.sync.set({
-    messageColor: e.target.checked,
+  document.addEventListener('DOMContentLoaded', async () => {
+    const options = await getChromeOptions();
+    $(`#${key}__input`).value = options[camelCaseKey];
   });
-});
 
-$('#message-border').addEventListener('change', (e) => {
-  chrome.storage.sync.set({
-    messageBorder: e.target.checked,
+  dom.addEventListener('change', function onMessageLineNumberChange(e) {
+    const { target } = e;
+    let value = target.value | 0;
+    if (value < target.min || value > target.max) {
+      value = Math.max(target.min, value);
+      value = Math.min(target.max, value);
+      target.value = value;
+      this.MaterialTextfield.checkValidity();
+    }
+    chrome.storage.sync.set({
+      [camelCaseKey]: value,
+    });
   });
-});
+}
 
-$('#message-shadow').addEventListener('change', (e) => {
-  chrome.storage.sync.set({
-    messageShadow: e.target.checked,
-  });
-});
+bindBooleanOption('message-color');
+bindBooleanOption('message-border');
+bindBooleanOption('message-shadow');
+bindNumberOption('message-line-number');
 
-$('#message-line-number').addEventListener('change', function onMessageLineNumberChange(e) {
-  const { target } = e;
-  let value = target.value | 0;
-  if (value < target.min || value > target.max) {
-    value = Math.max(target.min, value);
-    value = Math.min(target.max, value);
-    target.value = value;
-    this.MaterialTextfield.checkValidity();
-  }
-  chrome.storage.sync.set({
-    messageLineNumber: value,
-  });
-});
