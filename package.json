@@ -1,6 +1,6 @@
 {
   "name": "chat-danmaku",
-  "version": "0.2.2",
+  "version": "1.0.0",
   "description": "Show chat messages as danmaku over videos.",
   "main": "src/index.js",
   "devDependencies": {
