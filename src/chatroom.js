@@ -1,20 +1,35 @@
 import { Observable } from 'rxjs/Observable';
-import { getChromeOptions } from './utils';
+import { getChromeOptions, querySelector as $ } from './utils';
 import { keys as optionKeys } from './options/defaultOptions';
 
 const CLASS_PREFIX = 'chat-danmaku';
 
 class Chatroom {
+  options = {};
+  requireSelector = [];
+
   constructor() {
     this.msgObservable = Observable.create((observer) => {
       this.msgObserver = observer;
     });
-
     getChromeOptions().then(items => this.loadStorage(items, 'sync'));
     chrome.storage.onChanged.addListener(this.onStorageChanged.bind(this));
+    this.checkReady().then(this.onReady.bind(this));
   }
 
-  options = {}
+  checkReady() {
+    return new Promise((resolve) => {
+      const handler = setInterval(() => {
+        if (this.requireSelector.every(sel => $(sel) !== null)) {
+          clearInterval(handler);
+          resolve();
+        }
+      }, 1000);
+    });
+  }
+
+  onReady() {}
+  onUpdate() {}
 
   subscribe(...args) {
     this.msgObservable.subscribe(...args);

@@ -4,12 +4,9 @@ import { querySelector as $ } from '../../utils';
 const CLASS_PREFIX = 'chat-danmaku';
 
 class Twitch extends Chatroom {
-  constructor() {
-    super();
-    setTimeout(this.initialize, 2000);
-  }
+  requireSelector = ['.chat-list__lines div[role="log"]', '.player-video'];
 
-  initialize = () => {
+  onReady() {
     const chatroomEl = $('.chat-list__lines div[role="log"]');
     this.initDomObserver(chatroomEl);
     const playerEl = $('.player-video');
@@ -20,7 +17,7 @@ class Twitch extends Chatroom {
     newToggleChatroomBtn.classList.add(`${CLASS_PREFIX}__fake-toggle-collapse-btn`);
     newToggleChatroomBtn.addEventListener('click', Twitch.toggleChatroom);
     oldToggleChatroomBtn.parentNode.appendChild(newToggleChatroomBtn);
-  };
+  }
 
   static toggleChatroom() {
     const chatroomRootEl = $('.right-column > div:first-child');
