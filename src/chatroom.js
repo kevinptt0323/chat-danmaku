@@ -41,11 +41,11 @@ class Chatroom {
   }
 
   onStorageChanged(changed) {
-    for (let key of optionKeys) {
-      if (key in changed) {
+    optionKeys
+      .filter(key => key in changed)
+      .forEach((key) => {
         this.options[key] = changed[key].newValue;
-      }
-    }
+      });
   }
 
   static createCanvas(parentEl) {

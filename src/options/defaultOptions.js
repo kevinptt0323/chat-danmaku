@@ -10,8 +10,4 @@ const keys = Object.keys(defaultOptions);
 
 export default defaultOptions;
 
-export {
-  defaultOptions,
-  keys,
-};
-
+export { keys };
