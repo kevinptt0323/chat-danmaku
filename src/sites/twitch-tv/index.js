@@ -1,6 +1,8 @@
 import Chatroom from '../../chatroom';
 import { querySelector as $ } from '../../utils';
 
+const CLASS_PREFIX = 'chat-danmaku';
+
 class Twitch extends Chatroom {
   constructor() {
     super();
@@ -13,11 +15,11 @@ class Twitch extends Chatroom {
     const playerEl = $('.player-video');
     this.canvasEl = Chatroom.createCanvas(playerEl);
 
-    const oldToggleChatroomBtn = $('button[data-a-target="right-column__toggle-collapse-btn"]');
+    const oldToggleChatroomBtn = $('button.right-column__toggle-visibility');
     const newToggleChatroomBtn = oldToggleChatroomBtn.cloneNode(true);
+    newToggleChatroomBtn.classList.add(`${CLASS_PREFIX}__fake-toggle-collapse-btn`);
     newToggleChatroomBtn.addEventListener('click', Twitch.toggleChatroom);
     oldToggleChatroomBtn.parentNode.appendChild(newToggleChatroomBtn);
-    oldToggleChatroomBtn.remove();
   };
 
   static toggleChatroom() {

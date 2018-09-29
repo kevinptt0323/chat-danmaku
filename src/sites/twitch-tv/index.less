@@ -1,2 +1,9 @@
 .@{PREFIX}_message {
 }
+
+.right-column {
+  &[data-a-target="right-column-chat-bar-collapsed"] > button.right-column__toggle-visibility.@{PREFIX}__fake-toggle-collapse-btn,
+  &[data-a-target="right-column-chat-bar"] > button.right-column__toggle-visibility:not(.@{PREFIX}__fake-toggle-collapse-btn) {
+    display: none !important;
+  }
+}
