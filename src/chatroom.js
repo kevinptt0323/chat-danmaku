@@ -49,6 +49,9 @@ class Chatroom {
   }
 
   static createCanvas(parentEl) {
+    if (parentEl === null) {
+      return null;
+    }
     const canvasEl = document.createElement('div');
     canvasEl.classList.add(`${CLASS_PREFIX}-messages`);
     parentEl.appendChild(canvasEl);
