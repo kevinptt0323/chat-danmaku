@@ -11,11 +11,17 @@
   "danmakuStyle": {
     "message": "Danmaku Style"
   },
+  "display": {
+    "message": "Display"
+  },
   "ifAvailable": {
     "message": "If available"
   },
   "reset": {
     "message": "Reset"
+  },
+  "showAuthor": {
+    "message": "Show Author Name"
   },
   "textBorder": {
     "message": "Text Border"

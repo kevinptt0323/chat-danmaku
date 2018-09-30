@@ -62,13 +62,12 @@ class Twitch extends Chatroom {
     super.onUpdate();
     mutations.forEach(({ addedNodes }) => {
       addedNodes.forEach((node) => {
-        const authorEl =
-          node.querySelector('.chat-author__display-name');
-        const contentEl =
-          node.querySelector('span[data-a-target="chat-message-text"]');
+        const authorEl = node.querySelector('.chat-author__display-name');
+        const contentEl = node.querySelector('span[data-a-target="chat-message-text"]');
         if (authorEl && contentEl) {
           this.msgObserver.next({
             author: authorEl.innerHTML,
+            authorId: authorEl.dataset.aUser,
             color: authorEl.style.color,
             content: contentEl.innerHTML,
           });

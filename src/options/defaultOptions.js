@@ -2,8 +2,9 @@ const defaultOptions = {
   messageColor: true,
   messageBorder: true,
   messageShadow: false,
-  messageOpacity: 60,
+  messageOpacity: 80,
   messageLineNumber: 10,
+  showAuthor: false,
 };
 
 const keys = Object.keys(defaultOptions);

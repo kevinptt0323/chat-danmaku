@@ -77,6 +77,7 @@ function main() {
   bindBooleanOption('message-color');
   bindBooleanOption('message-border');
   bindBooleanOption('message-shadow');
+  bindBooleanOption('show-author');
   bindNumberOption('message-opacity');
   bindNumberOption('message-line-number');
 

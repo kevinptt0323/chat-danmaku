@@ -25,10 +25,8 @@ class GarenaLive extends Chatroom {
     super.onUpdate();
     mutations.forEach(({ addedNodes }) => {
       addedNodes.forEach((node) => {
-        const authorEl =
-          node.querySelector('.livestream__chat-author');
-        const contentEl =
-          node.querySelector('.livestream__chat-message-content');
+        const authorEl = node.querySelector('.livestream__chat-author');
+        const contentEl = node.querySelector('.livestream__chat-message-content');
         if (authorEl && contentEl) {
           this.msgObserver.next({
             author: authorEl.innerHTML,

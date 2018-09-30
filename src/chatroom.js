@@ -112,7 +112,11 @@ class Chatroom {
     }
     msgEl.style.setProperty('--opacity', this.options.messageOpacity / 100);
     msgEl.style.setProperty('--line-num', ~~(Math.random() * this.options.messageLineNumber));
-    msgEl.innerHTML = msg.content;
+    if (this.options.showAuthor) {
+      msgEl.innerHTML = `${msg.author}: ${msg.content}`;
+    } else {
+      msgEl.innerHTML = msg.content;
+    }
 
     this.canvasEl.appendChild(msgEl);
   }

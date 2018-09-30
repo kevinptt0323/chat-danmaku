@@ -7,10 +7,8 @@
   min-width: 400px;
   .option-group {
     display: block;
-
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(0,0,0,.12);
-    }
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    padding-bottom: 0;
 
     &__header {
       color: @primaryColor;
@@ -35,6 +33,6 @@
 }
 
 .actions {
-  padding-bottom: 14px;
+  padding: 14px 0;
   text-align: center;
 }

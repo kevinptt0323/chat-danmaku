@@ -11,11 +11,17 @@
   "danmakuStyle": {
     "message": "彈幕樣式"
   },
+  "display": {
+    "message": "顯示"
+  },
   "ifAvailable": {
     "message": "如果可用"
   },
   "reset": {
     "message": "重設"
+  },
+  "showAuthor": {
+    "message": "顯示回應者名稱"
   },
   "textBorder": {
     "message": "文字邊框"
