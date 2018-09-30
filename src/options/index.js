@@ -66,13 +66,25 @@ function bindNumberOption(key) {
   });
 }
 
-bindBooleanOption('message-color');
-bindBooleanOption('message-border');
-bindBooleanOption('message-shadow');
-bindNumberOption('message-opacity');
-bindNumberOption('message-line-number');
+function i18n() {
+  const i18nNodes = document.querySelectorAll('[data-i18n]');
+  [].forEach.call(i18nNodes, (node) => {
+    node.replaceWith(chrome.i18n.getMessage(node.dataset.i18n));
+  });
+}
 
-$('#reset').addEventListener('click', () => {
-  chrome.storage.sync.set(defaultOptions);
-});
+function main() {
+  bindBooleanOption('message-color');
+  bindBooleanOption('message-border');
+  bindBooleanOption('message-shadow');
+  bindNumberOption('message-opacity');
+  bindNumberOption('message-line-number');
 
+  $('#reset').addEventListener('click', () => {
+    chrome.storage.sync.set(defaultOptions);
+  });
+
+  i18n();
+}
+
+main();

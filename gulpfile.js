@@ -33,14 +33,16 @@ gulp.task('build:css', () => {
 })
 
 gulp.task('static', () => {
-  gulp.src(`${__dirname}/src/manifest.json`)
-    .pipe(gulp.dest(`${__dirname}/extension/`));
-  gulp.src(`${__dirname}/src/options/index.html`)
-    .pipe(gulp.dest(`${__dirname}/extension/options`));
   gulp.src(`${__dirname}/icons/**`)
     .pipe(gulp.dest(`${__dirname}/extension/icons`));
   gulp.src(`${__dirname}/lib/**`)
     .pipe(gulp.dest(`${__dirname}/extension/lib`));
+  gulp.src(`${__dirname}/src/_locales/**`)
+    .pipe(gulp.dest(`${__dirname}/extension/_locales`));
+  gulp.src(`${__dirname}/src/manifest.json`)
+    .pipe(gulp.dest(`${__dirname}/extension/`));
+  gulp.src(`${__dirname}/src/options/index.html`)
+    .pipe(gulp.dest(`${__dirname}/extension/options`));
 });
 
 gulp.task('build', ['build:js', 'build:css', 'static']);

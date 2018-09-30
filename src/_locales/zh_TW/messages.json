@@ -1,0 +1,32 @@
+{
+  "appName": {
+    "message": "Chat Danmaku"
+  },
+  "appDescription": {
+    "message": "觀賞實況時，以彈幕形式顯示聊天室訊息。"
+  },
+  "danmakuLineNumber": {
+    "message": "彈幕行數"
+  },
+  "danmakuStyle": {
+    "message": "彈幕樣式"
+  },
+  "ifAvailable": {
+    "message": "如果可用"
+  },
+  "reset": {
+    "message": "重設"
+  },
+  "textBorder": {
+    "message": "文字邊框"
+  },
+  "textColor": {
+    "message": "文字顏色"
+  },
+  "textOpacity": {
+    "message": "文字不透明度"
+  },
+  "textShadow": {
+    "message": "文字陰影"
+  }
+}

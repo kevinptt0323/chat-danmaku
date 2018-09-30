@@ -1,0 +1,32 @@
+{
+  "appName": {
+    "message": "Chat Danmaku"
+  },
+  "appDescription": {
+    "message": "Show chat room messages as danmaku when watching live streams."
+  },
+  "danmakuLineNumber": {
+    "message": "Number of Danmaku line"
+  },
+  "danmakuStyle": {
+    "message": "Danmaku Style"
+  },
+  "ifAvailable": {
+    "message": "If available"
+  },
+  "reset": {
+    "message": "Reset"
+  },
+  "textBorder": {
+    "message": "Text Border"
+  },
+  "textColor": {
+    "message": "Text Color"
+  },
+  "textOpacity": {
+    "message": "Text Opacity"
+  },
+  "textShadow": {
+    "message": "Text Shadow"
+  }
+}

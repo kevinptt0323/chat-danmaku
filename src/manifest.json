@@ -1,7 +1,7 @@
 {
     "manifest_version": 2,
-    "name": "Chat Danmaku",
-    "description": "Show chat messages as danmaku over videos.",
+    "name": "__MSG_appName__",
+    "description": "__MSG_appDescription__",
     "version": "1.1.1",
     "homepage_url": "https://github.com/kevinptt0323/chat-danmaku",
     "icons": { "16": "icons/icon-16.png",
@@ -10,6 +10,7 @@
     "browser_action": {
         "default_popup": "options/index.html"
     },
+    "default_locale": "en",
     "options_ui": {
         "page": "options/index.html",
         "open_in_tab": false
