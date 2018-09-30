@@ -32,9 +32,15 @@ gulp.task('build:css', () => {
     .pipe(gulp.dest(`${__dirname}/extension/options`));
 })
 
-gulp.task('build:html', () => {
+gulp.task('static', () => {
+  gulp.src(`${__dirname}/src/manifest.json`)
+    .pipe(gulp.dest(`${__dirname}/extension/`));
   gulp.src(`${__dirname}/src/options/index.html`)
     .pipe(gulp.dest(`${__dirname}/extension/options`));
+  gulp.src(`${__dirname}/icons/**`)
+    .pipe(gulp.dest(`${__dirname}/extension/icons`));
+  gulp.src(`${__dirname}/lib/**`)
+    .pipe(gulp.dest(`${__dirname}/extension/lib`));
 });
 
-gulp.task('build', ['build:js', 'build:css', 'build:html']);
+gulp.task('build', ['build:js', 'build:css', 'static']);
