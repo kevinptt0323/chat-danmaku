@@ -8,6 +8,8 @@ class Chatroom {
   options = {};
   requireSelector = [];
   requireSelectorCache = [];
+  lineNumberRecord = [];
+  static collisionLineNumber = 3;
 
   constructor() {
     this.msgObservable = Observable.create((observer) => {
@@ -43,6 +45,7 @@ class Chatroom {
 
   onReady() {
     this.requireSelectorCache = this.requireSelector.map(sel => $(sel));
+    this.lineNumberRecord = [];
     this.checkChange().then(this.onChange.bind(this));
   }
 
@@ -98,6 +101,22 @@ class Chatroom {
     return canvasEl;
   }
 
+  randomNextLineNumber() {
+    return ~~(Math.random() * this.options.messageLineNumber);
+  }
+
+  getNextLineNumber() {
+    let nextLineNumber = this.randomNextLineNumber();
+    while (this.lineNumberRecord.indexOf(nextLineNumber) !== -1) {
+      nextLineNumber = this.randomNextLineNumber();
+    }
+    if (this.lineNumberRecord.length === Chatroom.collisionLineNumber) {
+      this.lineNumberRecord = this.lineNumberRecord.slice(1);
+    }
+    this.lineNumberRecord.push(nextLineNumber);
+    return nextLineNumber;
+  }
+
   render(msg) {
     const msgEl = document.createElement('div');
     msgEl.classList.add(`${CLASS_PREFIX}-message`);
@@ -111,7 +130,7 @@ class Chatroom {
       msgEl.classList.add('shadow');
     }
     msgEl.style.setProperty('--opacity', this.options.messageOpacity / 100);
-    msgEl.style.setProperty('--line-num', ~~(Math.random() * this.options.messageLineNumber));
+    msgEl.style.setProperty('--line-num', this.getNextLineNumber());
     if (this.options.showAuthor) {
       msgEl.innerHTML = `${msg.author}: ${msg.content}`;
     } else {
