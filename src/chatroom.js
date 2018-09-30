@@ -7,14 +7,16 @@ const CLASS_PREFIX = 'chat-danmaku';
 class Chatroom {
   options = {};
   requireSelector = [];
+  requireSelectorCache = [];
 
   constructor() {
     this.msgObservable = Observable.create((observer) => {
       this.msgObserver = observer;
     });
+    this.chatroomObservable = new MutationObserver(mutations => this.onUpdate(mutations));
     getChromeOptions().then(items => this.loadStorage(items, 'sync'));
     chrome.storage.onChanged.addListener(this.onStorageChanged.bind(this));
-    this.checkReady().then(this.onReady.bind(this));
+    this.onChange();
   }
 
   checkReady() {
@@ -28,20 +30,42 @@ class Chatroom {
     });
   }
 
-  onReady() {}
-  onUpdate() {}
+  checkChange() {
+    return new Promise((resolve) => {
+      const handler = setInterval(() => {
+        if (this.requireSelector.some((sel, idx) => $(sel) !== this.requireSelectorCache[idx])) {
+          clearInterval(handler);
+          resolve();
+        }
+      }, 1000);
+    });
+  }
+
+  onReady() {
+    this.requireSelectorCache = this.requireSelector.map(sel => $(sel));
+    this.checkChange().then(this.onChange.bind(this));
+  }
+
+  onChange() {
+    this.requireSelectorCache = this.requireSelector.map(sel => $(sel));
+    this.checkReady().then(this.onReady.bind(this));
+  }
+
+  /* eslint-disable class-methods-use-this */
+  onUpdate() {
+  }
+  /* eslint-enable class-methods-use-this */
 
   subscribe(...args) {
     this.msgObservable.subscribe(...args);
   }
 
-  initDomObserver(chatroomEl) {
-    const observerOptions = {
-      childList: true,
-    };
+  observe(chatroomEl) {
+    this.chatroomObservable.observe(chatroomEl, { childList: true });
+  }
 
-    this.domObservable = new MutationObserver(mutations => this.onUpdate(mutations));
-    this.domObservable.observe(chatroomEl, observerOptions);
+  disconnect() {
+    this.chatroomObservable.disconnect();
   }
 
   loadStorage(items, namespace) {

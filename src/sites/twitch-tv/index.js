@@ -5,18 +5,34 @@ const CLASS_PREFIX = 'chat-danmaku';
 
 class Twitch extends Chatroom {
   requireSelector = ['.chat-list__lines div[role="log"]', '.player-video'];
+  requireSelectorCache = [];
 
   onReady() {
+    super.onReady();
     const chatroomEl = $('.chat-list__lines div[role="log"]');
-    this.initDomObserver(chatroomEl);
+    this.observe(chatroomEl);
     const playerEl = $('.player-video');
     this.canvasEl = Chatroom.createCanvas(playerEl);
 
     const oldToggleChatroomBtn = $('button.right-column__toggle-visibility');
-    const newToggleChatroomBtn = oldToggleChatroomBtn.cloneNode(true);
-    newToggleChatroomBtn.classList.add(`${CLASS_PREFIX}__fake-toggle-collapse-btn`);
-    newToggleChatroomBtn.addEventListener('click', Twitch.toggleChatroom);
-    oldToggleChatroomBtn.parentNode.appendChild(newToggleChatroomBtn);
+    this.newToggleChatroomBtn = oldToggleChatroomBtn.cloneNode(true);
+    this.newToggleChatroomBtn.classList.add(`${CLASS_PREFIX}__fake-toggle-collapse-btn`);
+    this.newToggleChatroomBtn.addEventListener('click', Twitch.toggleChatroom);
+    oldToggleChatroomBtn.parentNode.appendChild(this.newToggleChatroomBtn);
+  }
+
+  onChange() {
+    super.onChange();
+    this.disconnect();
+    if (this.canvasEl) {
+      this.canvasEl.remove();
+      this.canvasEl = null;
+    }
+    if (this.newToggleChatroomBtn) {
+      this.newToggleChatroomBtn.removeEventListener('click', Twitch.toggleChatroom);
+      this.newToggleChatroomBtn.remove();
+      this.newToggleChatroomBtn = null;
+    }
   }
 
   static toggleChatroom() {
@@ -43,6 +59,7 @@ class Twitch extends Chatroom {
   }
 
   onUpdate(mutations) {
+    super.onUpdate();
     mutations.forEach(({ addedNodes }) => {
       addedNodes.forEach((node) => {
         const authorEl =

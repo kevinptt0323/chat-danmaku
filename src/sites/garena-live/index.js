@@ -5,13 +5,24 @@ class GarenaLive extends Chatroom {
   requireSelector = ['.livestream__chat-messages', '.livestream__overlay'];
 
   onReady() {
+    super.onReady();
     const chatroomEl = $('.livestream__chat-messages');
-    this.initDomObserver(chatroomEl);
+    this.observe(chatroomEl);
     const parentEl = $('.livestream__overlay');
     this.canvasEl = Chatroom.createCanvas(parentEl);
   }
 
+  onChange() {
+    super.onChange();
+    this.disconnect();
+    if (this.canvasEl) {
+      this.canvasEl.remove();
+      this.canvasEl = null;
+    }
+  }
+
   onUpdate(mutations) {
+    super.onUpdate();
     mutations.forEach(({ addedNodes }) => {
       addedNodes.forEach((node) => {
         const authorEl =
